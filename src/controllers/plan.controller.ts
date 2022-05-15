@@ -13,8 +13,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { PlanModel } from 'src/models/plan.model';
 import { PlanSchema } from 'src/validations/plan.schema';
-import { PriceModel } from 'src/models/price.model';
-import { FeatureModel } from 'src/models/feature.model';
 
 @Controller('/plan')
 export class PlanController {
@@ -59,13 +57,6 @@ export class PlanController {
       throw new NotFoundException(`Não existe plano com o id ${planID}.`);
     }
     return plan;
-
-    // return this.model
-    //   .createQueryBuilder('plan')
-    //   .leftJoinAndSelect('plan.priceID', 'priceID')
-    //   .leftJoinAndSelect('plan.featureID', 'featureID')
-    //   .where('plan.planID = :planID', { planID: planID })
-    //   .getOne();
   }
 
   @Put(':planID')
