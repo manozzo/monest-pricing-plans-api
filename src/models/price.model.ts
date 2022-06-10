@@ -12,9 +12,11 @@ import { PlanModel } from './plan.model';
 
 @Entity()
 export class PriceModel {
-  @OneToMany(() => PlanModel, (priceID) => priceID.priceID)
   @PrimaryGeneratedColumn()
   priceID: number;
+
+  @OneToMany(() => PlanModel, (plan) => plan.priceID)
+  plans: PlanModel[];
 
   @Column()
   value: number;

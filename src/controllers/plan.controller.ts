@@ -28,13 +28,16 @@ export class PlanController {
   @Get()
   public async getAll(): Promise<PlanModel[]> {
     return this.model.find({
-      relations: ['priceID', 'featureID'],
+      relations: ['price', 'feature'],
     });
   }
 
   @Get('/actives')
   public async getActives(): Promise<PlanModel[]> {
-    const listActives = await this.model.find({ where: { planStatus: true } });
+    const listActives = await this.model.find({
+      where: { planStatus: true },
+      relations: ['price', 'feature'],
+    });
     if (!listActives) {
       throw new NotFoundException('Não existe planos ativos no momento');
     }
@@ -43,7 +46,7 @@ export class PlanController {
 
   @Get('/all-with-deleted')
   public async getAllDeleted(): Promise<PlanModel[]> {
-    return this.model.find({ withDeleted: true });
+    return this.model.find({ where: { deletedAt: !null } });
   }
 
   @Get(':planID')

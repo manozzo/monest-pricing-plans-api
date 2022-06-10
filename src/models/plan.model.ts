@@ -22,12 +22,16 @@ export class PlanModel {
   bestPlan: boolean;
 
   @Column()
-  @ManyToOne(() => PriceModel, (priceID) => priceID.priceID)
   priceID: number;
 
+  @ManyToOne(() => PriceModel, (price) => price.priceID)
+  price: PriceModel;
+
   @Column()
-  @ManyToOne(() => FeatureModel, (featureID) => featureID.featureID)
   featureID: number;
+
+  @ManyToOne(() => FeatureModel, (feature) => feature.featureID)
+  feature: FeatureModel;
 
   @Column()
   planStatus: boolean;

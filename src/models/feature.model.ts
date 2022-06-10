@@ -12,8 +12,10 @@ import { PlanModel } from './plan.model';
 @Entity()
 export class FeatureModel {
   @PrimaryGeneratedColumn()
-  @OneToMany(() => PlanModel, (featureID) => featureID.featureID)
   featureID: number;
+
+  @OneToMany(() => PlanModel, (plan) => plan.featureID)
+  plans: PlanModel[];
 
   @Column({ nullable: true })
   repositories: number;
